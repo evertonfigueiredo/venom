@@ -38,6 +38,18 @@ function start(client) {
 
   });
 
+  app.post("/all", async(req,res)=>{
+    const errors = validationResult(req).formatWith(({
+        msg
+    })=>{
+        return msg;
+    });
+
+    const  Messages  =  await client.loadEarlierMessages ('558197738641@c.us') ;
+
+    console.log(Messages);
+});
+
   app.post("/send", [
     body("number").notEmpty(),
     body("message").notEmpty(),
